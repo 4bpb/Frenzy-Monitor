@@ -1,3 +1,6 @@
 # Frenzy-Monitor
 
-If logic is correct add in discord implementation
+Fix Logic in second function
+Add Discord
+Add Proxy, Random UserAgent
+laslty Rerwrite
