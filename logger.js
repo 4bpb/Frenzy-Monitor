@@ -28,13 +28,16 @@ var log = function (message,status){
     if(status==="err"){
         console.log(chalk.bold.redBright(message)+"   "+getDateTime())
     }
-    else {
-        if(status==='ok'){
-            console.log(chalk.bold.greenBright(message)+"   "+getDateTime())
-        } else {
-            console.log(chalk.bold.magentaBright(message)+"   "+getDateTime())
-        }
+    if(status===''){
+        console.log(chalk.bold.magenta(message))
     }
+    if(status==='init'){
+        console.log(chalk.bold.yellow(message)+"   "+getDateTime())
+    }
+    if(status==='ok'){
+        console.log(chalk.bold.green(message)+"   "+getDateTime())
+    }
+    
 }
 
 
