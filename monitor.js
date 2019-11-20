@@ -9,10 +9,11 @@ function monitor(){
         log('Initial Request Success','ok')
         body = JSON.parse(body)
         product_total.push(body.flashsales.length)
+        log(body.flashsales.length,'init')
         var i = 0;
         while(i<body.flashsales.length){
             product_array.push(body.flashsales[i]["custom_message"])
-            log('Product: ' + body.flashsales[i]["custom_message"]+ ' Added','')
+            //log('Product: ' + body.flashsales[i]["custom_message"]+ ' Added','')
             i++
         }
         log('Initializing Main Monitor')
@@ -26,13 +27,13 @@ function monitor(){
 function getData(product_array,product_total){
     rp('https://frenzy.shopifyapps.com/api/flashsales')
     .then(function (body) {
-        log('Monitor Round Complete','init')
+
         body = JSON.parse(body)
         if(product_total!=body.flashsales.length){
             log('New product count : '+body.flashsales.length, 'ok')
             var x = 0;
             while(x<body.flashsales.length){
-                if(body.flashsales[x]!=product_array[x]){
+                if(body.flashsales[x]["custom_message"]!=product_array){
                     product_array.push(body.flashsales[x]["custom_message"])
                     log('Product: ' + body.flashsales[x]["custom_message"]+ ' Added')
                     log(body.flashsales[x]["custom_message"])
@@ -43,14 +44,17 @@ function getData(product_array,product_total){
                 }
                 x++
             }
+
         }
 
         getData(product_array,product_total)
     })
     .catch(function (err) {
         console.log(err)
-    });
+    }); 
 }
 
 
 monitor()
+
+
