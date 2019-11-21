@@ -1,5 +1,8 @@
 const log = require('./logger.js');
 var rp = require('request-promise');
+var toDiscord = require('./discord.js')
+
+
 
 function monitor() {
 	var init_length = [];
