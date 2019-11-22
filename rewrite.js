@@ -1,8 +1,6 @@
 const log = require('./logger.js');
 var rp = require('request-promise');
-var toDiscord = require('./discord.js')
-
-
+var toDiscord = require('./discord.js');
 
 function monitor() {
 	var init_length = [];
@@ -48,12 +46,22 @@ function getData(init_length, init_password) {
 				var x = 0;
 				while (x < body.flashsales.length) {
 					if (init_password.indexOf(data_password[x]) === -1) {
-						log('https://frenzy.sale/'+data_password[x], 'ok');
+						toDiscord(
+							body.flashsales[x]['custom_message'],
+							body.flashsales[x]['description'],
+							body.flashsales[x]['started_at'],
+							body.flashsales[x]['password'],
+							body.flashsales[x]['products_count'],
+							body.flashsales[x]['dropzone'],
+							body.flashsales[x]['price_range'],
+							body.flashsales[x]['shipping_message'],
+							body.flashsales[x]['image_urls'][1]
+                        );
+                        log('Webhook Sent','ok')
 						x++;
 					}
-					
-                }
-                monitor();
+				}
+				monitor();
 			} else {
 				getData(init_length, init_password);
 			}
