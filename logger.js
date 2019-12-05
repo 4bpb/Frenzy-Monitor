@@ -16,7 +16,7 @@ let log = function(msg, type, discord) {
 
 	if (discord === true) {
 		hook
-			.send(time + '    ' + msg)
+			.send(msg)
 			.then(console.log(time + '   ' + chalk.green('Webhook Sent   ') + msg));
 
 	} else {
