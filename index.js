@@ -52,7 +52,8 @@ function monitor(init_length,init_password){
             var y = 0;
             while (y < data_length) {
                 if (init_password.indexOf(data_password[y]) === -1) {
-                    log("https://frenzy.sale/"+data_password[y],'ok',true)
+                    //log("https://frenzy.sale/"+data_password[y],'ok',true)
+                    getData(data_password[y])
 
                 }
                 y++;
@@ -74,5 +75,75 @@ function monitor(init_length,init_password){
     });
 
 }
+
+
+function getData(password){
+    
+    rp('https://frenzy.shopifyapps.com/api/flashsales/'+password)
+    .then(function (body) {
+        body = JSON.parse(body)
+        var title = body.flashsale["title"]
+        var description  = body.flashsale["description"]
+        var time  = body.flashsale["started_at"]
+        var priceRange  = body.flashsale["price_range"]["min"] + "-" + body.flashsale["price_range"]["max"]
+        var shippingMessage = body.flashsale["shipping_message"]
+        var productCount = body.flashsale["products_count"]
+        var dropzone = body.flashsale["dropzone"]
+        var image = body.flashsale["image_urls"][0]
+
+        var msg = {
+            
+                "embeds": [{
+                  "title": title,
+                  "url": "https://frenzy.sale/"+password,
+                  "description": description,
+                  "image": {
+                    "url": image
+                  },
+                  "fields":[
+                        {
+                        "name": "Count Down",
+                        "value": time,
+                        "inline": true
+                        },
+                        {
+                        "name": "Price Range",
+                        "value": priceRange,
+                        "inline": true
+                        },
+                        {
+                        "name": "Shipping Message",
+                        "value": shippingMessage,
+                        "inline": true
+                        },
+                        {
+                        "name": "Product Count",
+                        "value": productCount,
+                        "inline": true
+                        }
+
+                  ]
+                }]
+              
+        }
+
+        log(msg,'',true)
+
+
+        
+ 
+
+
+    })
+    .catch(function (err) {
+        log('Embeded webhook Error https://frenzy.sale/'+ password,'',true)
+        
+    });
+}
+
+
+
+
+
 
 main()
