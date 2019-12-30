@@ -1,7 +1,7 @@
 # Frenzy-Monitor
-Added: 
+Added
 - Global Password List to avoid frenzy reposting passwords.
 - Calender Events
-ToDo:
+ToDo
 - Filtered List
 - Error functions send embbed messages aswell
