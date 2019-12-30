@@ -138,7 +138,7 @@ function getData(password){
         body = JSON.parse(body)
         var title = body.flashsale["title"]
         var description  = body.flashsale["description"]
-        var time  = new Date((body.flashsale["started_at"]))
+        var time  = new Date((body.flashsale["started_at"])).toString()
         var priceRange  = body.flashsale["price_range"]["min"] + "-" + body.flashsale["price_range"]["max"]
         var shippingMessage = body.flashsale["shipping_message"]
         var productCount = body.flashsale["products_count"]
@@ -188,7 +188,8 @@ function getData(password){
                         "inline": true
                         },
                         {
-                        "name": "[Calendar Event]("+cal.google(event)+")",
+                        "name": "Calendar Event",
+                        "value": "[Event]("+cal.google(event)+")",
                         "inline": false
                         }
 
