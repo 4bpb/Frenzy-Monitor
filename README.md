@@ -1,5 +1,5 @@
-# Frenzy-Monitor
-Added
+
+# Added
 - Global Password List to avoid frenzy reposting passwords.
 - Calender Events
 # ToDo
