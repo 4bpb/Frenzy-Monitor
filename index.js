@@ -160,11 +160,11 @@ function getData(password){
                   "url": "https://frenzy.sale/"+password,
                   "description": description,
                   "timestamp": time,
+                  "thumbnail": {
+                    "url": image,
+                },
                   "footer": {
                     "text": "Found in "+apiResponse+" Seconds"
-                  },
-                  "image": {
-                    "url": image
                   },
                   "fields":[
                         {
