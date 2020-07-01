@@ -2,6 +2,7 @@ var rp = require('request-promise');
 var log = require('./logger')
 const fs = require('fs');
 var cal = require('generate-calendar-url');
+const Discord = require('discord.js');
 
 
 let config = fs.readFileSync('config.json');
@@ -213,8 +214,14 @@ function getData(password){
 }
 
 
+function startmessage(){
+    let webhookID = '727697683942342758';
+    let webhookToken = 'HRVPgWQsOUtPlV1SvxWwd-jQexZXeS4j1xpSp1OsTUluc8EsX15WHLIk2E6OwroPKC8G';
+    const hook = new Discord.WebhookClient(webhookID, webhookToken);
+    hook.send('Monitor has started')
+}
 
 
 
-
+startmessage()
 main()
